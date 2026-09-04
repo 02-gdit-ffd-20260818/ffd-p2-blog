@@ -1,6 +1,6 @@
 # 长风成卷｜P2 个人博客与内容管理平台
 
-当前版本：`p2-v1.1` 管理端。
+当前版本：`p2-v2.0` REST 前后端联调。
 
 生产地址：<https://ffd-p2-blog.netlify.app/>
 
@@ -11,6 +11,12 @@ npm ci
 npm run check
 npm test
 npm run dev
+```
+
+另开一个终端运行 API：
+
+```powershell
+npm run dev:api
 ```
 
 生产构建：
@@ -34,10 +40,17 @@ npm run build
 - 草稿隔离、字段级校验、删除确认和 localStorage 刷新恢复。
 - 管理端 service 的正常、边界和失败测试。
 
+## v2.0 新增
+
+- Express health 与文章 REST CRUD，统一 400/404/500 错误格式。
+- 内存 repository 隔离数据层，为 v2.1 替换 SQLite 留出边界。
+- 前端 `articleApi` 与异步 Pinia action，API 停止时显示 error/retry。
+- CORS、请求 ID、脱敏结构化日志、API 契约与 `.http` 请求集。
+
 ## 状态模拟
 
 - 空数据：`/?empty=1`
 - 请求失败：`/?fail=1`
-- 文章不存在：`/#/articles/missing`
+- 文章不存在：`/articles/missing`
 
 教师指南见 `docs/lesson-07-teacher-guide.md`，学生入口见 `docs/lesson-07-student-guide.md`。

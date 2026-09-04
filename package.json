@@ -1,6 +1,6 @@
 {
   "name": "ffd-p2-blog",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -8,6 +8,8 @@
   },
   "scripts": {
     "dev": "vite",
+    "dev:api": "node --watch server/index.js",
+    "start:api": "node server/index.js",
     "check": "node scripts/check-project.mjs",
     "test:unit": "node --test tests/*.test.mjs",
     "test:component": "vitest run",
@@ -15,6 +17,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "express": "^5.1.0",
     "pinia": "^3.0.0",
     "vue": "^3.5.0",
     "vue-router": "^4.5.0"

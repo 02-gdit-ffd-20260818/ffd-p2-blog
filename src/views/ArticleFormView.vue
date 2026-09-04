@@ -8,6 +8,7 @@ const router = useRouter()
 const { store } = useArticles()
 const saved = ref(false)
 const errors = ref({})
+const formError = ref('')
 const existing = computed(() => store.byId(props.id))
 const form = reactive({ id: '', title: '', slug: '', summary: '', content: '', tags: '', status: 'draft', author: '林晓', publishedAt: '' })
 
@@ -16,10 +17,14 @@ watch(existing, (article) => {
   Object.assign(form, article, { content: article.content.join('\n\n'), tags: article.tags.join(', ') })
 }, { immediate: true })
 
-function submit() {
-  const result = store.save(form)
+async function submit() {
+  formError.value = ''
+  const result = await store.save(form)
   errors.value = result.errors
-  if (!result.ok) return
+  if (!result.ok) {
+    formError.value = result.formError || ''
+    return
+  }
   saved.value = true
   router.push('/admin/articles')
 }
@@ -30,6 +35,7 @@ function submit() {
     <p class="eyebrow">{{ id ? '编辑' : '新建' }}</p>
     <h1>文章表单</h1>
     <form novalidate @submit.prevent="submit">
+      <p v-if="formError" class="field-error">{{ formError }}</p>
       <label class="field">标题<input v-model.trim="form.title" maxlength="60" /><span v-if="errors.title" class="field-error">{{ errors.title }}</span></label>
       <label class="field">摘要<textarea v-model.trim="form.summary" maxlength="160" rows="3" /><span v-if="errors.summary" class="field-error">{{ errors.summary }}</span></label>
       <label class="field">正文<textarea v-model="form.content" rows="8" /></label>
