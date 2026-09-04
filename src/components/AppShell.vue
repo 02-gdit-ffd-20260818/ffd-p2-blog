@@ -5,6 +5,6 @@
       <nav aria-label="主导航"><slot name="navigation" /></nav>
     </header>
     <main id="main-content" class="main-content"><slot /></main>
-    <footer class="site-footer">P2 v2.1 · SQLite 持久化</footer>
+    <footer class="site-footer">P2 v2.2 · MySQL 与权限</footer>
   </div>
 </template>

@@ -1,6 +1,6 @@
 {
   "name": "ffd-p2-blog",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -15,6 +15,11 @@
     "db:verify": "node database/verify.mjs",
     "db:backup": "node database/backup.mjs",
     "db:restore": "node database/restore.mjs",
+    "db:mysql:migrate": "node database/mysql/migrate.mjs",
+    "db:mysql:seed": "node database/mysql/seed.mjs",
+    "db:mysql:verify": "node database/mysql/verify.mjs",
+    "db:mysql:backup": "node database/mysql/backup.mjs",
+    "db:mysql:restore": "node database/mysql/restore.mjs",
     "check": "node scripts/check-project.mjs",
     "test:unit": "node --test tests/*.test.mjs",
     "test:component": "vitest run",
@@ -23,6 +28,7 @@
   },
   "dependencies": {
     "express": "^5.1.0",
+    "mysql2": "^3.15.0",
     "pinia": "^3.0.0",
     "vue": "^3.5.0",
     "vue-router": "^4.5.0"

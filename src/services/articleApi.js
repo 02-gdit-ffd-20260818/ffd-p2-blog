@@ -1,9 +1,12 @@
+import { getAccessToken } from './authSession.js'
+
 const apiBase = String(import.meta.env?.VITE_API_BASE_URL || '').replace(/\/$/, '')
 
 async function request(path, options = {}, fetcher = fetch) {
+  const token = getAccessToken()
   const response = await fetcher(`${apiBase}${path}`, {
     ...options,
-    headers: { 'content-type': 'application/json', ...options.headers },
+    headers: { 'content-type': 'application/json', ...(token ? { authorization: `Bearer ${token}` } : {}), ...options.headers },
   })
   if (response.status === 204) return null
   const body = await response.json().catch(() => ({}))
