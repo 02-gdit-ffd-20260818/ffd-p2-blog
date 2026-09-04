@@ -3,6 +3,12 @@
   publish = "dist"
 
 [[redirects]]
+  from = "/health"
+  to = "http://47.120.73.69/ffd-p2-api/health"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/api/*"
   to = "http://47.120.73.69/ffd-p2-api/api/:splat"
   status = 200
