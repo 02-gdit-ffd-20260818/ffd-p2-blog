@@ -11,6 +11,8 @@
 
 首次部署后记录站点名、生产 URL、Git commit 和部署 ID。后续保持同一 URL。
 
+仓库 Settings → Secrets and variables → Actions 中配置 `NETLIFY_AUTH_TOKEN` 和 `NETLIFY_SITE_ID`，不要把值写进代码或截图。`deploy-netlify.yml` 监听 `verify-p2` 的完成事件：只有 `main` 分支检查成功才构建并发布生产站点。公开健康检查为 <https://ffd-p2-blog.netlify.app/health>。
+
 已验证部署：
 
 | 课次 | 版本 | Deploy ID | 固定 URL |
@@ -30,7 +32,7 @@
 
 ## GitHub Actions
 
-每次 push/PR 必须依次执行锁定依赖安装、结构检查、自动测试和生产构建。Netlify 部署不能代替 GitHub CI。
+每次 push/PR 必须依次执行锁定依赖安装、结构检查、自动测试和生产构建。检查失败不部署；检查成功后再由独立的 `deploy-netlify` 工作流发布，避免“构建失败的代码仍上线”。
 
 ## 第 9 次课以后
 
