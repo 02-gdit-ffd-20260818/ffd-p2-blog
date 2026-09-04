@@ -1,6 +1,6 @@
 # 长风成卷｜P2 个人博客与内容管理平台
 
-当前版本：`p2-v2.0` REST 前后端联调。
+当前版本：`p2-v2.1` SQLite 持久化、迁移与备份恢复。
 
 生产地址：<https://ffd-p2-blog.netlify.app/>
 
@@ -46,6 +46,14 @@ npm run build
 - 内存 repository 隔离数据层，为 v2.1 替换 SQLite 留出边界。
 - 前端 `articleApi` 与异步 Pinia action，API 停止时显示 error/retry。
 - CORS、请求 ID、脱敏结构化日志、API 契约与 `.http` 请求集。
+
+## v2.1 新增
+
+- Node 内置 SQLite 数据库，默认写入被 Git 忽略的 `var/p2-blog.sqlite`。
+- `users`、`articles`、`comments` 三表迁移，外键级联、索引与迁移历史。
+- SQLite repository 持久化 CRUD，以及状态、关键词、分页查询。
+- `db:migrate`、`db:seed`、`db:verify`、`db:backup`、`db:restore` 运维命令。
+- 第 10 次课教师指南和数据库自动测试。
 
 ## 状态模拟
 

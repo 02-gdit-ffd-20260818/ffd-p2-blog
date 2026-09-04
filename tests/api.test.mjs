@@ -30,6 +30,16 @@ test('GET 列表支持状态和关键词查询', () => withApi(async (base) => {
   assert.equal(body.total, 1)
 }))
 
+test('GET 列表返回受上限保护的分页元数据', () => withApi(async (base) => {
+  const response = await fetch(`${base}/api/articles?page=2&pageSize=1`)
+  const body = await response.json()
+  assert.equal(response.status, 200)
+  assert.equal(body.page, 2)
+  assert.equal(body.pageSize, 1)
+  assert.equal(body.total, 1)
+  assert.equal(body.data.length, 0)
+}))
+
 test('POST 正常创建并可再次读取', () => withApi(async (base) => {
   const created = await fetch(`${base}/api/articles`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(validInput) })
   assert.equal(created.status, 201)

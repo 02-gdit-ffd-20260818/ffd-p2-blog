@@ -25,3 +25,5 @@
 ## 第 9 次课以后
 
 前端仍可由 Netlify 托管；API、SQLite/MySQL、Nginx 和健康检查迁移到 Ubuntu。生产环境变量只在平台或服务器配置，不写入仓库。
+
+SQLite 生产文件应放在持久目录并由服务用户独占，例如通过 `DATABASE_PATH=/srv/ffd-p2/data/p2-blog.sqlite` 指定。发布前运行 `db:backup`，发布后运行 `db:migrate` 与 `db:verify`。不要把 SQLite 文件放进 Git 工作区或 Netlify 静态站点。

@@ -1,4 +1,4 @@
-# P2 v2.0 REST API 契约
+# P2 v2.1 REST API 契约
 
 基础路径由 `VITE_API_BASE_URL` 指定；本地开发为空，由 Vite 把 `/api` 代理到 `http://127.0.0.1:3000`。
 
@@ -11,7 +11,7 @@
 | PUT | `/api/articles/:id` | `200 { data }` | `400` / `404` |
 | DELETE | `/api/articles/:id` | `204` | `404` |
 
-列表支持 `status=published|draft` 和 `q=关键词` 查询参数。
+列表支持 `status=published|draft`、`q=关键词`、`page` 和 `pageSize` 查询参数。`page` 默认 1；`pageSize` 默认 20、最大 50。响应同时返回 `total`、`page` 和 `pageSize`。
 
 错误统一格式：
 

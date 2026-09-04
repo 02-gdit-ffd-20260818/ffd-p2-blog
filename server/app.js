@@ -25,10 +25,10 @@ export function createApp({ repository = createMemoryArticleRepository(seedArtic
   app.get('/api/articles', (req, res) => {
     const status = req.query.status
     const query = String(req.query.q || '').trim().toLocaleLowerCase('zh-CN')
-    let articles = repository.list()
-    if (status) articles = articles.filter((item) => item.status === status)
-    if (query) articles = articles.filter((item) => `${item.title} ${item.summary} ${item.tags.join(' ')}`.toLocaleLowerCase('zh-CN').includes(query))
-    res.json({ data: articles, total: articles.length })
+    const page = Math.max(1, Number.parseInt(req.query.page, 10) || 1)
+    const pageSize = Math.min(50, Math.max(1, Number.parseInt(req.query.pageSize, 10) || 20))
+    const { items, total } = repository.list({ status, query, page, pageSize })
+    res.json({ data: items, total, page, pageSize })
   })
 
   app.get('/api/articles/:id', (req, res) => {
