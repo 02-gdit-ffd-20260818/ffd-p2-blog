@@ -29,6 +29,7 @@ const rules = [
   ['列表处理 error 与重试', /status === 'error'/.test(files.list) && /retry/.test(files.list)],
   ['Netlify 指向 dist', /publish = "dist"/.test(files.netlify)],
   ['Netlify 配置 SPA fallback', /status = 200/.test(files.netlify)],
+  ['Netlify 在 SPA fallback 前代理 Ubuntu API', files.netlify.indexOf('from = "/api/*"') < files.netlify.indexOf('from = "/*"') && /ffd-p2-api\/api\/:splat/.test(files.netlify)],
   ['Router 包含动态编辑路由', /:id\/edit/.test(files.router)],
   ['Pinia store 集中保存文章', /defineStore/.test(files.store)],
   ['表单使用 v-model 与字段错误', /v-model/.test(files.form) && /field-error/.test(files.form)],

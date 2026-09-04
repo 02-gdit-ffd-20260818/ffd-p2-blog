@@ -1,6 +1,6 @@
 # 长风成卷｜P2 个人博客与内容管理平台
 
-当前版本：`p2-v2.1` SQLite 持久化、迁移与备份恢复。
+当前版本：`p2-v2.1.1` SQLite 持久化生产部署补丁。
 
 生产地址：<https://ffd-p2-blog.netlify.app/>
 
@@ -54,6 +54,11 @@ npm run build
 - SQLite repository 持久化 CRUD，以及状态、关键词、分页查询。
 - `db:migrate`、`db:seed`、`db:verify`、`db:backup`、`db:restore` 运维命令。
 - 第 10 次课教师指南和数据库自动测试。
+
+## v2.1.1 部署补丁
+
+- Ubuntu systemd API 与 Nginx 路径反向代理已经上线。
+- Netlify 通过同源 `/api/*` 转发到 Ubuntu，前端无需暴露跨域地址。
 
 ## 状态模拟
 
