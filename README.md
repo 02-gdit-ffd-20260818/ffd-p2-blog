@@ -1,6 +1,6 @@
 # 长风成卷｜P2 个人博客与内容管理平台
 
-当前版本：`p2-v1.0` 阅读端。
+当前版本：`p2-v1.1` 管理端。
 
 ## 5 分钟启动
 
@@ -24,6 +24,13 @@ npm run build
 - loading、success、empty、error、not-found 状态。
 - 10 项逻辑测试、3 项组件测试和 9 项结构检查。
 - GitHub Actions 与 Netlify 配置。
+
+## v1.1 新增
+
+- Vue Router 动态路由与 Netlify SPA fallback。
+- Pinia 文章 store、搜索、新建、编辑、删除和预览。
+- 草稿隔离、字段级校验、删除确认和 localStorage 刷新恢复。
+- 管理端 service 的正常、边界和失败测试。
 
 ## 状态模拟
 
