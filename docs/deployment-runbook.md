@@ -2,12 +2,21 @@
 
 ## Netlify（第 7—8 次课主平台）
 
+- 固定生产地址：<https://ffd-p2-blog.netlify.app/>
+- Site ID：`c728261f-c688-4d17-b68d-93d6621cabb0`
 - Build command：`npm run build`
 - Publish directory：`dist`
 - Node：24
 - SPA fallback：由 `netlify.toml` 配置
 
 首次部署后记录站点名、生产 URL、Git commit 和部署 ID。后续保持同一 URL。
+
+已验证部署：
+
+| 课次 | 版本 | Deploy ID | 固定 URL |
+| --- | --- | --- | --- |
+| 07 | `p2-v1.0` | `6a9a3ffc65561e2353fdd1e6` | <https://ffd-p2-blog.netlify.app/> |
+| 08 | `p2-v1.1` | `6a9a4025c2fafd06b7da9cde` | <https://ffd-p2-blog.netlify.app/> |
 
 ## GitHub Actions
 

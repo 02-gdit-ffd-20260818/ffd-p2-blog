@@ -2,6 +2,8 @@
 
 当前版本：`p2-v1.1` 管理端。
 
+生产地址：<https://ffd-p2-blog.netlify.app/>
+
 ## 5 分钟启动
 
 ```powershell
