@@ -3,6 +3,9 @@ import { ensureDatabaseDirectory, migrateDatabase, openDatabase, seedAdmin, seed
 import { migrateMysql, openMysqlPool, seedMysql, seedMysqlAdmin } from './mysqlDatabase.js'
 import { createMysqlArticleRepository } from './repositories/mysqlArticleRepository.js'
 import { createMysqlUserRepository } from './repositories/mysqlUserRepository.js'
+import { migratePostgres, openPostgresPool, seedPostgres, seedPostgresAdmin } from './postgresDatabase.js'
+import { createPostgresArticleRepository } from './repositories/postgresArticleRepository.js'
+import { createPostgresUserRepository } from './repositories/postgresUserRepository.js'
 import { createSqliteArticleRepository } from './repositories/sqliteArticleRepository.js'
 import { createSqliteUserRepository } from './repositories/sqliteUserRepository.js'
 
@@ -13,7 +16,15 @@ let repository
 let userRepository
 let closeDatabase
 
-if (process.env.DB_DRIVER === 'mysql') {
+if (process.env.DB_DRIVER === 'postgres') {
+  const pool = openPostgresPool()
+  await migratePostgres(pool)
+  repository = createPostgresArticleRepository(pool)
+  userRepository = createPostgresUserRepository(pool)
+  await seedPostgres(pool)
+  await seedPostgresAdmin(userRepository, admin)
+  closeDatabase = () => pool.end()
+} else if (process.env.DB_DRIVER === 'mysql') {
   const pool = openMysqlPool()
   await migrateMysql(pool)
   repository = createMysqlArticleRepository(pool)

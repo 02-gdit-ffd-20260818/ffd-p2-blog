@@ -21,3 +21,38 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run build
+  postgres-compatibility:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: ffd_p2
+          POSTGRES_USER: ffd_p2_app
+          POSTGRES_PASSWORD: test-only-password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ffd_p2_app -d ffd_p2"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      POSTGRES_HOST: 127.0.0.1
+      POSTGRES_PORT: 5432
+      POSTGRES_DATABASE: ffd_p2
+      POSTGRES_USER: ffd_p2_app
+      POSTGRES_PASSWORD: test-only-password
+      POSTGRES_SSL: "false"
+      ADMIN_USERNAME: teacher
+      ADMIN_PASSWORD: test-only-admin-password
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run db:postgres:migrate
+      - run: npm run db:postgres:seed
+      - run: npm run db:postgres:verify

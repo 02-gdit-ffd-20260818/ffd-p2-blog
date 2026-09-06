@@ -20,6 +20,11 @@
     "db:mysql:verify": "node database/mysql/verify.mjs",
     "db:mysql:backup": "node database/mysql/backup.mjs",
     "db:mysql:restore": "node database/mysql/restore.mjs",
+    "db:postgres:migrate": "node database/postgres/migrate.mjs",
+    "db:postgres:seed": "node database/postgres/seed.mjs",
+    "db:postgres:verify": "node database/postgres/verify.mjs",
+    "db:postgres:backup": "node database/postgres/backup.mjs",
+    "db:postgres:restore": "node database/postgres/restore.mjs",
     "check": "node scripts/check-project.mjs",
     "test:unit": "node --test tests/*.test.mjs",
     "test:component": "vitest run",
@@ -29,6 +34,7 @@
   "dependencies": {
     "express": "^5.1.0",
     "mysql2": "^3.15.0",
+    "pg": "^8.16.3",
     "pinia": "^3.0.0",
     "vue": "^3.5.0",
     "vue-router": "^4.5.0"

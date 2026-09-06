@@ -39,3 +39,17 @@
 前端仍可由 Netlify 托管；API、SQLite/MySQL、Nginx 和健康检查迁移到 Ubuntu。生产环境变量只在平台或服务器配置，不写入仓库。
 
 SQLite 生产文件应放在持久目录并由服务用户独占，例如通过 `DATABASE_PATH=/srv/ffd-p2/data/p2-blog.sqlite` 指定。发布前运行 `db:backup`，发布后运行 `db:migrate` 与 `db:verify`。不要把 SQLite 文件放进 Git 工作区或 Netlify 静态站点。
+
+## PostgreSQL 备用路径
+
+将 `DB_DRIVER` 设为 `postgres`，并仅在服务器环境文件中配置 `POSTGRES_HOST`、`POSTGRES_PORT`、`POSTGRES_DATABASE`、`POSTGRES_USER`、`POSTGRES_PASSWORD` 和 `POSTGRES_SSL`。依次运行：
+
+```bash
+npm run db:postgres:migrate
+npm run db:postgres:seed
+npm run db:postgres:verify
+npm run db:postgres:backup -- /srv/ffd-p2/backups/p2-postgres.dump
+npm run db:postgres:restore -- /srv/ffd-p2/backups/p2-postgres.dump
+```
+
+不要同时切换生产驱动和删除原数据库。先在隔离数据库验证、备份原生产库，再修改 systemd 环境并执行健康检查；失败时恢复原 `DB_DRIVER` 后重启服务。

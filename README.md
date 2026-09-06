@@ -68,6 +68,13 @@ npm run build
 - MySQL 三表迁移、utf8mb4、外键、参数化 repository，以及迁移、seed、验证、备份和恢复命令。
 - 第 11 次课完整教师实施与生产回滚指南。
 
+## PostgreSQL 备用兼容
+
+- `DB_DRIVER=postgres` 可使用 PostgreSQL 作为 MySQL 不可用时的备用数据层。
+- 提供独立的迁移、seed、验证、`pg_dump` 备份与 `pg_restore` 恢复命令。
+- CI 使用 PostgreSQL 17 服务容器执行真实兼容检查；Ubuntu 已用 PostgreSQL 16 完成 3 篇文章的备份—恢复等量核验。
+- 演练记录和命令见 `docs/postgresql-backup-rehearsal.md`。
+
 ## 状态模拟
 
 - 空数据：`/?empty=1`
